@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "transcribeproject-343014",
+  "private_key_id": "3f3835b0a53366306a8d5f0887448206b6a9fe18",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCbysjYskJYm6GK\nwYsixmwqZdHhIx4PfQGaiEoBbV5E4N82j2wTl8ZDgurX3Eq+JEAQxXnHtu24W0oR\nUVLj5VU9SDxkpLUZVR7g1E9wDQiGF+wp/F8UeQDcL4Uj1i7RgFz659+Cu8L7IJ3M\nyeDFK/lgkw0Hft82u1OVgCJvFO0Nn0eDqENiLlrx9XbnnEm1k7X65AZFWe/A8+9g\nJ+ppAf3hrpAUDlIGXWof8PP1+ilYeyiEO78TJRfXjYSwrtXaUeJ30UI879v68ttV\n8tKrgihjLAndQP9qaf4C7WT/M8678736DbVidZCYzD4raGzWnBqLtHmsaA6nABiY\nGCj7NenZAgMBAAECggEACstKTq9NJwADeY5u4jYuxOJAoDFzcf3GiGs0e3RVMX8G\nICzgP1xG9aMCu/mMqS9wS+kuxp5fSqRylZAVpuobFY+ldZCu5oYuCURUi64vfsD2\nETOl79BxdZAKUMEUhdn3tz+tDg0N1aH9JPUA0JB7KwyNPM120D8665MQ77LauNSK\nWqmQ+DUUZURvAu/jMTLhPMDZyC96UR1cNmn7/lokCP4DmDl6l2I3GTZ8dtiZDo7V\nsVy9SJD9+E6Et/HAI+5Iy5Dh2W+szU4z2qknFkLbIZuJvAJypopqaPF2pxjsZyAj\nNr7D0LHecJKm2Td1XtBp31RckpK2DPdvwXdRBxhPwQKBgQDXSW1PTHchj3hm2SyS\nf4nyZHKadE03sXmIPZb2Ooi6KG5RnAI2UyKmxOVRKc+csiFlShTt1LJR6mcFswEG\nJhD3X3ZdW2p4NUXej3GjuK0pJx13jPPcd2e3mO6OUKx6vqfpjpDf/FIBEMoqEG2t\no+QVxtEGJNJfg/IyKvG0PWKbeQKBgQC5QRIV94W32ZjwsGrGeH10vCtXQ8A6Pzh6\nZqVlbTq0fKfR+8kHQbHHYGzAcql9oVppMaRvKBQrEP5aboIDwmFvl7tgVOJGE3MM\ntcKGqf6RaWAlVOZkXOXVv/cqbak5vhgDVVFrOgpoiOtKwe05qisllOlR9cKcVr1o\nUECS2j/JYQKBgAZC2mz9+lD9jTDgjA1OrEJibXrUexJtlO1DbUqH9UYEuwCgmufd\njxpui4TKxID4JUR+3RD1qKH9QTXHOPZm0QOAwT6B1Bze38NTRKjQTCjwPEknzkfR\nKTELv5RgAEQpm1SNkuUQv4nMZTTH+YidRZrkh1u4Ym3otniDCziEuINxAoGAM8Yn\n09PVn0hFIh9r+AP8q/9a7YyV0LGSi0LcvrgETCT6kgkYadrGYL5mJnLlQ6MwrW2e\nUyKUYGTjcUqpM3vD13hEeeu/QW52HPs/XntsFh+pK0XLDgmYgmCgJ092mBi0hVn2\n40zZU9XQTJheQFt6q4oumyVgOmlTji+/nEs6wIECgYBs1KBLCYZHVR3bsjz2bqMD\n5dWalKFVxm36SGA21t7QZU/GaMq2W1DNVN3WX22po6qalFFl+kJTWFX1XODp1egE\n24xJg23zCPXmrQKHuzar/1752xFSacTzP0bGKuedirr8BjryIyzDlE+uYQrqaTUQ\nlhI9FM82NRplKdl58u2iaA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "zibah-712@transcribeproject-343014.iam.gserviceaccount.com",
+  "client_id": "110730982854069848727",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/zibah-712%40transcribeproject-343014.iam.gserviceaccount.com"
+}
