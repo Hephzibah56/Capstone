@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-#[START speech_transcribe_infinite_streaming]
+##File contains helper functions
 
 import re
 import sys
@@ -12,6 +11,7 @@ import pyaudio
 #from six.moves import queue
 import queue
 
+
 # Audio recording parameters
 STREAMING_LIMIT = 240000  # 4 minutes
 SAMPLE_RATE = 16000
@@ -19,7 +19,6 @@ CHUNK_SIZE = int(SAMPLE_RATE / 10)  # 100ms
 RED = "\033[0;31m"
 GREEN = "\033[0;32m"
 YELLOW = "\033[0;33m"
-
 
 def get_current_time():
     """Return Current Time in MS."""
@@ -34,7 +33,6 @@ def timeConversion(milisec):
     remainingsec = milisec % 60    ##correct sec
     time = {'hour':str(hour), 'minute': str(min), 'seconds': str(remainingsec)}
     return time
-
 
 class ResumableMicrophoneStream:
     """Opens a recording stream as a generator yielding the audio chunks."""
@@ -84,7 +82,7 @@ class ResumableMicrophoneStream:
         """Continuously collect data from the audio stream, into the buffer."""
         self._buff.put(in_data)
         return None, pyaudio.paContinue
-
+    
     def generator(self):
         """Stream Audio from microphone is sent to API and then to local buffer"""
         while not self.closed:
@@ -116,9 +114,7 @@ class ResumableMicrophoneStream:
             if chunk is None:
                 return
             data.append(chunk)
-
             #Now consume whatever other data's still buffered.
-
             while True:
                 try:
                     chunk = self._buff.get(block=False)
@@ -131,12 +127,18 @@ class ResumableMicrophoneStream:
             yield b"".join(data)
 
 
+def print_transcript(filename):
+    with open(filename, 'r') as f:
+        lines = f.readlines()
+        return lines
+
 def listen_print_loop(responses, stream):
     """Iterates through server responses and prints them.
     The responses passed is a generator that will block until a response
     is provided by the server.
     """
     textfile = open('transcribed.txt', 'a')
+    transDict = {}
 
     for response in responses:
         if get_current_time() - stream.start_time > STREAMING_LIMIT:
@@ -162,24 +164,27 @@ def listen_print_loop(responses, stream):
 
         stream.result_end_time = int((result_seconds * 1000) + (result_micros / 1000))
         corrected_time = (
-            stream.result_end_time
-            - stream.bridging_offset
-            + (STREAMING_LIMIT * stream.restart_counter)
+        stream.result_end_time
+        - stream.bridging_offset
+        + (STREAMING_LIMIT * stream.restart_counter)
         )
         # Display interim results, but with a carriage return at the end of the
         # line, so subsequent lines will overwrite them.
         timestamps = timeConversion(corrected_time)
         line = "{}: {}  \n".format(str(corrected_time), transcript)
 
-        ## TO-DO: format the time stamp              
+            ## TO-DO: format the time stamp              
         if result.is_final:
             sys.stdout.write(GREEN)
             #sys.stdout.write("\033[K")
 
             textfile.write(line)
-             
+                
             sys.stdout.write(str(corrected_time) + ": " + transcript + "\n")
+              
             sys.stdout.write(line)
+
+            transDict[corrected_time] = transcript
 
             stream.is_final_end_time = stream.result_end_time
             stream.last_transcript_was_final = True
@@ -192,16 +197,15 @@ def listen_print_loop(responses, stream):
                 stream.closed = True
                 break
             ##return jsonify(dict)
-        else:
-            sys.stdout.write(RED)
-            #sys.stdout.write("\033[K")
-            sys.stdout.write(str(corrected_time) + ": " + transcript + "\r")
-            stream.last_transcript_was_final = False
-
-    textfile.close()
-    return True   ## to indicate that it has written the transcribed text to the file
-    
-    ##return jsonify(dict)
+            else:
+                sys.stdout.write(RED)
+                #sys.stdout.write("\033[K")
+                sys.stdout.write(str(corrected_time) + ": " + transcript + "\r")
+                stream.last_transcript_was_final = False
+            
+            textfile.close()
+            return transDict   ## to indicate that it has written the transcribed text to the file
+        
     
 def main():
     """start bidirectional streaming from microphone input to speech API"""
@@ -240,13 +244,13 @@ def main():
             )
             responses = client.streaming_recognize(streaming_config, requests)
             # Now, put the transcription responses to use.
-            indicator = listen_print_loop(responses, stream)
-            if (indicator == True):
-                with open('transcribed.txt', 'r') as f:
-                    lines = f.readlines()
-                    ##print(lines)
-                ##get all contents of the file
 
+            # indicator = listen_print_loop(responses, stream)
+
+            # if (indicator == True):  ## checking if the transcript has been done
+            #     return print_transcript('transcribed.txt')  ## printing everything from the file
+
+           
             if stream.result_end_time > 0:
                 stream.final_request_end_time = stream.is_final_end_time
             stream.result_end_time = 0
@@ -258,8 +262,9 @@ def main():
             if not stream.last_transcript_was_final:
                 sys.stdout.write("\n")
             stream.new_stream = True
-            return lines
 
-if __name__ == "__main__":
-    main()
-# [speech_transcribe_infinite_streaming ends]
+            return listen_print_loop(responses, stream)
+            ##return lines
+
+                            
+
