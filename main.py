@@ -5,22 +5,22 @@ import utility
 
 app = FastAPI()
 
+
 @app.get("/")
 async def root(background_tasks: BackgroundTasks):
     background_tasks.add_task(utility.main)
     return "transcription service initiated"
-    
 
-@app.get("/speak")
+
+@app.get("/read_transcript")
 async def speak():
-    utility.main
     # transcript_arr = []
     transcript_dict = {}
 
     for line in Pygtail("transcribed.txt"):
         line = line.split(":")
-        # # array
+        # using array
         # transcript_arr.append(line[1])
-        #dict
+        # using dict
         transcript_dict[line[0]] = line[1]
     return transcript_dict
